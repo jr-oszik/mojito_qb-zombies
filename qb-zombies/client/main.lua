@@ -346,19 +346,16 @@ if Config.ZombieDropLoot then
 
 										--Citizen.Wait(2000)
 										randomChance = math.random(1, 100)
-										randomWeapon = Config.WeaponLoot[math.random(1, #Config.WeaponLoot)]
 										randomItem = Config.ItemLoot[math.random(1, #Config.ItemLoot)]
-
-										if randomChance > 0 and randomChance < Config.ProbabilityWeaponLootObject then
-											TriggerServerEvent('qb-zombies:itemloot', randomWeapon)
-											QBCore.Functions.Notify('You found a ' .. randomWeapon,'success')
-										elseif randomChance >= Config.ProbabilityWeaponLootObject and randomChance < Config.ProbabilityMoneyLootObject then
+											
+										if randomChance >= Config.ProbabilityWeaponLootObject and randomChance < Config.ProbabilityMoneyLootObject then
 											TriggerServerEvent('qb-zombies:moneyloot')
 										elseif randomChance >= Config.ProbabilityMoneyLootObject and randomChance < Config.ProbabilityItemLootObject then
 											TriggerServerEvent('qb-zombies:itemloot', randomItem)
 										elseif randomChance >= Config.ProbabilityItemLootObject and randomChance < 100 then
 											QBCore.Functions.Notify('You found nothing','error')
 										end
+											
 										ClearPedSecondaryTask(GetPlayerPed(-1))
 										local model = GetEntityModel(entity)
 										SetEntityAsNoLongerNeeded(entity)
